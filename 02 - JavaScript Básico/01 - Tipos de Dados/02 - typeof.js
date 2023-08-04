@@ -1,0 +1,10 @@
+console.log(typeof 1)
+console.log(typeof 1.2)
+console.log(typeof 'Felipe')
+console.log(typeof '1')
+console.log(typeof true)
+// number
+// number
+// string
+// string
+// boolean
