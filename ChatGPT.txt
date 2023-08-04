@@ -1,0 +1,1 @@
+resuma, em formato de código javascript, com comentários, sobre
