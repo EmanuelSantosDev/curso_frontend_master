@@ -1,7 +1,8 @@
 /*
-    titulo.classList.contains('azul')
-    titulo.classList.remove('azul')
-    titulo.classList.add('vermelho')
+    titulo.classList.contains('nomeClasse')
+    titulo.classList.remove('nomeClasse')
+    titulo.classList.add('nomeClasse')
+    titulo.classList.toggle('nomeClasse')
 */
 
 const titulo = document.querySelector('#title')
@@ -18,6 +19,8 @@ botao.addEventListener('click', () => {
     }
 })
 
-botao.addEventListener('click', () => {
-    // código aqui
+// 'toggle' adiciona uma classe se ela não estiver presente 
+// e remove a classe se ela já estiver presente
+botao2.addEventListener('click', () => {
+    titulo.classList.toggle('letra-grande')
 })

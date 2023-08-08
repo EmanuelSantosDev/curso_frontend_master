@@ -7,3 +7,7 @@
     color: red;
     font-style: italic
 }
+
+.letra-grande {
+    font-size: 50px;
+}
