@@ -10,8 +10,10 @@ formulario.addEventListener('keydown', (event) => {
     console.log(event.key)
     console.log(event.keyCode)
 
+    // capturando o valor digitado em um campo input
+    // ao clicar no 'Enter'
     if (event.keyCode === 13) {
-        alert('Você clicou no ENTER')
+        alert(formulario.value)
     }
 })
 
