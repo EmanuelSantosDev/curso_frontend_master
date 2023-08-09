@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button>Executar</button>
+
+    <script>
+
+        /*
+            O 'Promise.all([])' é usado para lidar com um conjunto de Promises de 
+            forma síncrona, aguardando até que todas as Promises sejam resolvidas 
+            ou até que pelo menos uma delas seja rejeitada.
+        */
+
+        function testePromise() {
+            const p1 = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('valor p1')
+                }, 1000);
+            })
+
+            const p2 = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve('valor p2')
+                }, 3000);
+            })
+
+            const p3 = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    reject('valor p3 com erro') // simulando um erro para o catch
+                }, 2000);
+            })
+
+            // Promise.all()
+            Promise.all([p1, p2, p3])
+                .then((valores) => {
+                    console.log(valores) // array com os valores
+                })
+                .catch((valor) => {
+                    console.error(valor) // valor da primeira promise rejeitada
+                })
+        }
+
+        const botao = document.querySelector('button')
+        botao.addEventListener('click', testePromise)
+
+    </script>
+
+</body>
+
+</html>
