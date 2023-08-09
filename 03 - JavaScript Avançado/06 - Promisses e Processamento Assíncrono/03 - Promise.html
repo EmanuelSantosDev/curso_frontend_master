@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button>Executar</button>
+
+    <script>
+
+        /*
+            PROMISE
+
+            O objeto Promise representa a conclusão (ou falha) 
+            de uma operação assíncrona e seu valor resultante.
+
+            Sintaxe:
+            new Promise((resolve, reject) => {})
+
+            'resolve': função para retornar o resultado da promise.
+
+            'reject': função para retornar o erro da promise.
+
+            'then': definE o bloco executado mediante o cumprimento de uma promise
+
+            'catch': definE o bloco executado mediante a rejeição  de uma promise
+
+        */
+
+        let contador = 0
+
+        function testePromise() {
+            ++contador
+            console.log('Função Síncrona - INÍCIO')
+
+            new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    if (contador % 2 === 0) {
+                        resolve(contador)
+                    } else {
+                        reject(contador)
+                    }
+                }, 3000);
+            }).then((contador) => {
+                console.log(`FUNÇÃO ASSÍNCRONA: o número ${contador} é par`)
+            }).catch((contador) => {
+                console.error(`FUNÇÃO ASSÍNCRONA: o número ${contador} é ímpar`)
+            })
+
+            console.log('Função Síncrona - FIM')
+        }
+
+        const botao = document.querySelector('button')
+        botao.addEventListener('click', testePromise)
+
+    </script>
+
+</body>
+
+</html>
