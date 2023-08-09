@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- consultando dados da API do Github -->
+    <button id="emanuel">Emanuel</button>
+    <button id="felipe">Felipe</button>
+    <br><br>
+
+    <script>
+
+        /*
+            Asynchronous JavaScript And XML (AJAX) é uma tecnologia
+            utilizada para realizar comunicação entre navegador e
+            servidor “sem sair da página”.
+
+            A propriedade 'readyState' do objeto 'XMLHttpRequest' é um 
+            indicador do estado atual da requisição. Ela possui os seguintes 
+            valores possíveis:
+
+            '0' (UNSENT): A requisição foi criada, mas o método open() ainda 
+                não foi chamado.
+            '1' (OPENED): O método open() foi chamado, mas o método send() ainda 
+                não foi chamado.
+            '2' (HEADERS_RECEIVED): O método send() foi chamado e os cabeçalhos 
+                e status da resposta estão disponíveis.
+            '3' (LOADING): Os dados da resposta estão sendo carregados (utilizado 
+                principalmente para requisições de longa duração e streaming).
+            '4' (DONE): A operação está concluída e os dados estão prontos para 
+                serem usados.
+        */
+
+        const carregarDados = (urlRequisitada) => {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', urlRequisitada) // abrindo a conexão com os dados
+            xhr.send(null) // realizando o envio das informações
+            xhr.onreadystatechange = () => {
+                if (xhr.readyState === 4) {
+                    const resposta = JSON.parse(xhr.responseText)
+
+                    const avatarUrl = resposta.avatar_url
+                    const name = resposta.name
+                    const followers = resposta.followers
+                    const blogUrl = resposta.blog
+
+                    // criando o elemento do Avatar
+                    const elementoAvatar = document.createElement('img')
+                    elementoAvatar.setAttribute('width', '128')
+                    elementoAvatar.setAttribute('src', avatarUrl)
+
+                    // criando o elemento do nome
+                    const elementoNome = document.createElement('h1')
+                    elementoNome.innerText = name
+
+                    // criando o elemento Followers
+                    const elementoFollowers = document.createElement('p')
+                    elementoFollowers.innerText = `Seguidores: ${followers}`
+
+                    // criando o elemento do Hyperlink
+                    const elementoHyperlink = document.createElement('a')
+                    if (blogUrl) {
+                        elementoHyperlink.setAttribute('href', 'https://' + blogUrl)
+                        elementoHyperlink.innerText = blogUrl
+                    } else {
+                        elementoHyperlink.innerText = 'Este usuário não possui site'
+                    }
+
+                    // anexando os elementos ao DOM
+                    document.body.append(elementoAvatar)
+                    document.body.append(elementoNome)
+                    document.body.append(elementoFollowers)
+                    document.body.append(elementoHyperlink)
+                    document.body.append(document.createElement('br'))
+                    document.body.append(document.createElement('br'))
+                }
+            }
+        }
+
+        // selecionando os botões
+        const botaoEmanuel = document.querySelector('#emanuel')
+        const botaoFelipe = document.querySelector('#felipe')
+
+        // capturando evento de click
+        botaoEmanuel.addEventListener('click', () => {
+            carregarDados('https://api.github.com/users/EmanuelSantosDev')
+        })
+
+        botaoFelipe.addEventListener('click', () => {
+            carregarDados('https://api.github.com/users/felipefontoura')
+        })
+
+    </script>
+
+</body>
+
+</html>
